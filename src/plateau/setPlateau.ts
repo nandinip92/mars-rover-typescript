@@ -1,6 +1,6 @@
-type Grid = [number, number];
+import { Grid, Boundary } from "./setPlateau.types";
+
 type plateauShape = "Square" | "Rectangle";
-//type Boundary = [Grid, Grid];
 
 /*
 RULES:
@@ -12,17 +12,22 @@ ALGORITHM:
 ----------
 1. Check if the given input 'CoOrds'[x,y] should be greater than 0 i.e, x>0 and y>0. If so then throw an error.
 2.In this case first we are considering Square/Rectangle and the lower left corner is [0,0] fixedCoOrds. 
-Just in case if in future  co0ordinates are not fixed, setting the fixedCoords as optional parameter
-3. Setting the lowerBound and upperBound coordinates for the Plateau. This helps while moving the Rover as it should be inside the platues only.
+Just in case if in future lower left co0ordinates are not fixed to origin[0,0], setting the fixedCoords as optional parameter
+3. Setting the lowerBound and upperBound coordinates for the Plateau.This helps while moving the Rover as it should be inside the platues only.
 
+LowerLeft coOrdinates ---> fixedCoOrds --> OptionalInput,
+upperRight coOrdinates ---> coOrds --->Input
 */
 export function setPlateauCoOrdintes(coOrds: Grid, fixedCoOrds?: Grid) {
-  if (coOrds[0] <= 0 || coOrds[1] <= 0)
-    throw new Error("Plateau co-ordinates must be >0 ");
-
   const coOrdsLowerBound = fixedCoOrds === undefined ? [0, 0] : fixedCoOrds;
+  //upper right coordinates must always be greater than the lower left coordinates
+  if (coOrds[0] <= coOrdsLowerBound[0] || coOrds[1] <= coOrdsLowerBound[1])
+    throw new Error("Plateau co-ordinates must be > fixed values ");
 
-  const plateauBoundary = [coOrdsLowerBound, coOrds];
+  const plateauBoundary = {
+    lowerBound: { x: coOrdsLowerBound[0], y: coOrdsLowerBound[1] },
+    upperBound: { x: coOrds[0], y: coOrds[1] },
+  };
 
   return plateauBoundary;
 }
