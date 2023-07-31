@@ -9,12 +9,22 @@ type compassDirectionType = {
   S: Grid;
 };
 
+type TurnDirections = {
+  N: compassDirections;
+  E: compassDirections;
+  W: compassDirections;
+  S: compassDirections;
+};
+type Turn = {
+  L: TurnDirections;
+  R: TurnDirections;
+};
 interface RoverPosition {
   coOrds: Grid;
   currentDirection: compassDirections;
 }
 
-const turningDirection = {
+const turningDirection: Turn = {
   L: { N: "W", W: "S", S: "E", E: "N" },
   R: { N: "E", E: "S", S: "W", W: "N" },
 };
@@ -56,11 +66,11 @@ export function setRoverAndExecute(
     if (direction === "M") {
       currentCoOrds = moveRover(plateauBoundary, currentCoOrds, roverDirection);
     } else {
-      roverDirection = turningDirection[direction][roverDirection];
-      // roverDirection =
-      //   direction === "L"
-      //     ? getNewDirection("L", roverDirection)
-      //     : getNewDirection("R", roverDirection);
+      //roverDirection = turningDirection[direction][roverDirection];
+      roverDirection =
+        direction === "L"
+          ? getNewDirection("L", roverDirection)
+          : getNewDirection("R", roverDirection);
     }
   });
 }
@@ -91,12 +101,12 @@ function moveRover(
 }
 
 /*
- * getNewDirection() function will return
+ * getNewDirection() function will return the direction after making the Left/Right turn
  */
 function getNewDirection(
   turnDirection: "L" | "R",
   roverDirection: compassDirections
 ): compassDirections {
-  //
-  return "N";
+  //returns the direction after looking up in to NEWS constant variable
+  return turningDirection[turnDirection][roverDirection];
 }
