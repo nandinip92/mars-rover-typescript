@@ -1,5 +1,5 @@
 import { Boundary, CoOrds } from "../plateau/setPlateau.types";
-import { setRoverInitialPosition } from "../rovers/setRover";
+import { setRoverAndExecute } from "../rovers/setRoverAndExecute";
 
 /*
 *----------*
