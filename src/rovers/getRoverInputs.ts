@@ -34,7 +34,7 @@ export function getRoverInputs(
   const roverInstructions = instructions.replace(/\s+/g, "").split("");
 
   if (isValidPositon(givenPosition) && isValidInstruction(roverInstructions)) {
-    setRoverAndExecute(plateauBoundary, givenPosition, instructions);
+    setRoverAndExecute(plateauBoundary, givenPosition, roverInstructions);
   }
 }
 
