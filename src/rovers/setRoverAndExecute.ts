@@ -1,43 +1,11 @@
 import { Boundary, Grid } from "../plateau/setPlateau.types";
 import { isInsidePlateau } from "../plateau/isInsidePlateau";
-import { Interface } from "readline";
-type compassDirections = "N" | "E" | "S" | "W";
-type compassDirectionType = {
-  N: Grid;
-  E: Grid;
-  W: Grid;
-  S: Grid;
-};
+import { compassDirections, NEWS, turningDirection } from "./rover.types";
 
-type TurnDirections = {
-  N: compassDirections;
-  E: compassDirections;
-  W: compassDirections;
-  S: compassDirections;
-};
-type Turn = {
-  L: TurnDirections;
-  R: TurnDirections;
-};
 interface RoverPosition {
   coOrds: Grid;
   currentDirection: compassDirections;
 }
-
-const turningDirection: Turn = {
-  L: { N: "W", W: "S", S: "E", E: "N" },
-  R: { N: "E", E: "S", S: "W", W: "N" },
-};
-
-// To get to the next point in respective directions from (0,0).
-// i.e, To get to  respective direction from (X,Y)
-// North = (X,Y+1), East = (X+1,Y), West =(X-1,Y), South= (X,Y-1)
-const NEWS: compassDirectionType = {
-  N: [0, 1],
-  E: [1, 0],
-  W: [-1, 0],
-  S: [0, -1],
-};
 
 /*
 *------------------------------*
@@ -73,6 +41,8 @@ export function setRoverAndExecute(
           : getNewDirection("R", roverDirection);
     }
   });
+
+  return currentCoOrds.join(" ").concat(` ${roverDirection}`);
 }
 
 /*
