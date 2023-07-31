@@ -10,11 +10,11 @@ export function isInsidePlateau(
   coOrdinate: Grid
 ): Boolean {
   const x =
-    plateauBoundary.lowerBound.x <= coOrdinate[0] &&
-    coOrdinate[0] <= plateauBoundary.upperBound.x;
+    plateauBoundary.lowerLeftCorner.x <= coOrdinate[0] &&
+    coOrdinate[0] <= plateauBoundary.upperRightCorner.x;
   const y =
-    plateauBoundary.lowerBound.y <= coOrdinate[1] &&
-    coOrdinate[1] <= plateauBoundary.upperBound.y;
+    plateauBoundary.lowerLeftCorner.y <= coOrdinate[1] &&
+    coOrdinate[1] <= plateauBoundary.upperRightCorner.y;
 
   return x && y;
 }
