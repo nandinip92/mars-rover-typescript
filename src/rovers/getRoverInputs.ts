@@ -22,7 +22,7 @@ export function getRoverInputs(
     .map((ele) => (isNaN(parseInt(ele)) ? ele : parseInt(ele))); //Convering to numbers
 
   if (checkCurrentPositionValidity(currentPosition)) {
-    setRoverInitialPosition(plateauBoundary, currentPosition);
+    setRoverAndExecute(plateauBoundary, currentPosition);
   }
 }
 

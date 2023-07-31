@@ -10,7 +10,7 @@ type RoverPosition = { coOrds: CoOrds; currentDirection: compassDirections };
 */
 
 //This function will check if the given input position of the rover is  valid or not
-export function setRoverInitialPosition(
+export function setRoverAndExecute(
   plateauBoundary: Boundary,
   initialPosition: Array<string | number>
 ) {}
