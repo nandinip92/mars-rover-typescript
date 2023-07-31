@@ -3,7 +3,10 @@ import { setRoverAndExecute } from "../../src/rovers/setRoverAndExecute";
 describe("setRoverInitialPosition", () => {
   test("Return the final position of the rover", () => {
     //Arrange
-    const boundary = { lowerBound: { x: 0, y: 0 }, upperBound: { x: 5, y: 5 } };
+    const boundary = {
+      lowerLeftCorner: { x: 0, y: 0 },
+      upperRightCorner: { x: 5, y: 5 },
+    };
 
     //Act and Assert
     expect(
@@ -24,7 +27,10 @@ describe("setRoverInitialPosition", () => {
   });
 
   test("Rover should not move outside the Plateau boundary", () => {
-    const boundary = { lowerBound: { x: 0, y: 0 }, upperBound: { x: 5, y: 5 } };
+    const boundary = {
+      lowerLeftCorner: { x: 0, y: 0 },
+      upperRightCorner: { x: 5, y: 5 },
+    };
     expect(
       setRoverAndExecute(
         boundary,
@@ -44,8 +50,8 @@ describe("setRoverInitialPosition", () => {
 
   test("Testing if the lower right corner of the plateau is not on origin (0,0)", () => {
     const boundary = {
-      lowerBound: { x: -2, y: -2 },
-      upperBound: { x: 5, y: 5 },
+      lowerLeftCorner: { x: -2, y: -2 },
+      upperRightCorner: { x: 5, y: 5 },
     };
     expect(
       setRoverAndExecute(
