@@ -8,14 +8,17 @@ interface RoverPosition {
 }
 
 /*
-*------------------------------*
-|What setRoverAndExecute does? |
-*------------------------------*
+*-------------------------------*
+| What setRoverAndExecute does? |
+*-------------------------------*
 This function will get plateauBoundary, initialPosition and roverInstructions as inputs
-plateauBoundary is to check if the moving position is inside the plateau boundaries
+1. 'plateauBoundary' is to check if the moving position is inside the plateau boundaries or not
+  1(a) If yes then it will move a step ahead if not it will stay still.
+2. `initialPosition` is th estarting position of the rover and the direction it is faced Eg: { coOrds: [1, 2], currentDirection: "N" }.
+3. `roverInstructions` is the string of Instructions on how the rover should move. Eg LMLMLMLMM
+returns a the final position of the rover after processing the instructions as string Eg "5 1 N"
 */
 
-//This function will check if the given input position of the rover is  valid or not
 export function setRoverAndExecute(
   plateauBoundary: Boundary,
   initialPosition: RoverPosition,
@@ -34,7 +37,6 @@ export function setRoverAndExecute(
     if (direction === "M") {
       currentCoOrds = moveRover(plateauBoundary, currentCoOrds, roverDirection);
     } else {
-      //roverDirection = turningDirection[direction][roverDirection];
       roverDirection =
         direction === "L"
           ? getNewDirection("L", roverDirection)
