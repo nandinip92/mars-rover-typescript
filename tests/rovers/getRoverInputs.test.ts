@@ -16,7 +16,7 @@ describe("getRoverInputs", () => {
       "Invalid input. Input must contain X and Y co-ordinates and a compass direction (N|E|S|W) seperated by space - X Y Direction"
     );
     expect(() => {
-      getRoverInputs(boundary, " 5 T N", "MMMMMMM");
+      getRoverInputs(boundary, " 5 T N", "MMMM   MMM");
     }).toThrow(
       "Invalid input. Input must contain X and Y co-ordinates and a compass direction (N|E|S|W) seperated by space - X Y Direction"
     );

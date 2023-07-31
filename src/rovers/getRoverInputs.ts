@@ -31,7 +31,7 @@ export function getRoverInputs(
     .split(" ")
     .map((ele) => (isNaN(parseInt(ele)) ? ele : parseInt(ele))); //Convering digits from string to number and leaves strings as is
 
-  const roverInstructions = instructions.split("");
+  const roverInstructions = instructions.replace(/\s+/g, "").split("");
 
   if (isValidPositon(givenPosition) && isValidInstruction(roverInstructions)) {
     setRoverAndExecute(plateauBoundary, givenPosition, instructions);
