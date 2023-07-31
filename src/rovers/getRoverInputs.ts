@@ -1,5 +1,5 @@
 import { Boundary, CoOrds } from "../plateau/setPlateau.types";
-import { setRoverInitialPosition } from "./setRoverInitialPosition";
+import { setRoverInitialPosition } from "../rovers/setRover";
 
 /*
 *----------*
@@ -11,7 +11,7 @@ import { setRoverInitialPosition } from "./setRoverInitialPosition";
 */
 
 //This function will check if the given input position of the rover is  valid or not
-export function getRoverInitialPosition(
+export function getRoverInputs(
   plateauBoundary: Boundary,
   initialPosition: string
 ) {
