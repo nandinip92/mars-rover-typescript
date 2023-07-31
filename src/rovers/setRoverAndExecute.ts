@@ -2,7 +2,7 @@ import { Boundary, Grid } from "../plateau/setPlateau.types";
 import { isInsidePlateau } from "../plateau/isInsidePlateau";
 import { Interface } from "readline";
 type compassDirections = "N" | "E" | "S" | "W";
-type compassDitectionType = {
+type compassDirectionType = {
   N: Grid;
   E: Grid;
   W: Grid;
@@ -22,7 +22,7 @@ const turningDirection = {
 // To get to the next point in respective directions from (0,0).
 // i.e, To get to  respective direction from (X,Y)
 // North = (X,Y+1), East = (X+1,Y), West =(X-1,Y), South= (X,Y-1)
-const NEWS: compassDitectionType = {
+const NEWS: compassDirectionType = {
   N: [0, 1],
   E: [1, 0],
   W: [-1, 0],
@@ -56,18 +56,19 @@ export function setRoverAndExecute(
     if (direction === "M") {
       currentCoOrds = moveRover(plateauBoundary, currentCoOrds, roverDirection);
     } else {
-      //roverDirection = turningDirection[direction][roverDirection];
-      roverDirection =
-        direction === "L"
-          ? getNewDirection("L", roverDirection)
-          : getNewDirection("R", roverDirection);
+      roverDirection = turningDirection[direction][roverDirection];
+      // roverDirection =
+      //   direction === "L"
+      //     ? getNewDirection("L", roverDirection)
+      //     : getNewDirection("R", roverDirection);
     }
   });
 }
 
 /*
-moveRover function will move the rover one step ahead in the direction it is facing
-*/
+ * moveRover() function will move the rover one step ahead in the direction it is facing
+ * and returns the new (X,Y) coordinates
+ */
 function moveRover(
   plateauBoundary: Boundary,
   currentRoverCoOrds: Grid,
@@ -88,9 +89,14 @@ function moveRover(
     ? newPosition
     : currentRoverCoOrds;
 }
+
+/*
+ * getNewDirection() function will return
+ */
 function getNewDirection(
   turnDirection: "L" | "R",
   roverDirection: compassDirections
 ): compassDirections {
+  //
   return "N";
 }
