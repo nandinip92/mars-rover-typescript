@@ -18,15 +18,19 @@ Just in case if in future lower left co0ordinates are not fixed to origin[0,0], 
 LowerLeft coOrdinates ---> fixedCoOrds --> OptionalInput,
 upperRight coOrdinates ---> coOrds --->Input
 */
-export function setPlateauCoOrdintes(coOrds: Grid, fixedCoOrds?: Grid) {
-  const coOrdsLowerBound = fixedCoOrds === undefined ? [0, 0] : fixedCoOrds;
-  //upper right coordinates must always be greater than the lower left coordinates
-  if (coOrds[0] <= coOrdsLowerBound[0] || coOrds[1] <= coOrdsLowerBound[1])
-    throw new Error("Plateau co-ordinates must be > fixed values ");
+export function setPlateauBoundary(
+  lowerLeftCoOrds: Grid,
+  upperRightcoOrds: Grid,
+  plateauShape?: plateauShape
+) {
+  // const coOrdsLowerBound = fixedCoOrds === undefined ? [0, 0] : fixedCoOrds;
+  // //upper right coordinates must always be greater than the lower left coordinates
+  // if (coOrds[0] <= coOrdsLowerBound[0] || coOrds[1] <= coOrdsLowerBound[1])
+  //   throw new Error("Plateau co-ordinates must be > fixed values ");
 
   const plateauBoundary = {
-    lowerBound: { x: coOrdsLowerBound[0], y: coOrdsLowerBound[1] },
-    upperBound: { x: coOrds[0], y: coOrds[1] },
+    lowerBound: { x: lowerLeftCoOrds[0], y: lowerLeftCoOrds[1] },
+    upperBound: { x: upperRightcoOrds[0], y: upperRightcoOrds[1] },
   };
 
   return plateauBoundary;
