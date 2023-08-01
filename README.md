@@ -85,3 +85,29 @@ _Expected Output:_
 5 1 E
 
 ```
+
+## Creating Your application
+
+This app is a mini-adventure story which runs in the console.
+
+👉 First, fork and clone this repository.
+
+👉 Then run this command:
+
+```
+npm install
+
+```
+
+👉 You can then run
+
+```
+npm start
+```
+
+Core logic files :
+
+```
+src/plateau/isInsidePlateau.ts
+src/rover/setRoverAndExecute.ts
+```
