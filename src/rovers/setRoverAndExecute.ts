@@ -22,7 +22,7 @@ returns a the final position of the rover after processing the instructions as s
 
 export function setRoverAndExecute(
   plateauCorners: PlateauCorners,
-  plateauShape: plateauShape,
+  plateauShape: PlateauShape,
   initialPosition: RoverPosition,
   roverInstructions: string
 ) {
@@ -60,7 +60,7 @@ export function setRoverAndExecute(
  */
 function moveRover(
   plateauBoundary: PlateauCorners,
-  plateauShape: plateauShape,
+  plateauShape: PlateauShape,
   currentRoverCoOrds: Grid,
   currentDirection: compassDirections
 ): Grid {
