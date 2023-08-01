@@ -1,11 +1,11 @@
 import { plateauShape, Boundary, Grid } from "../plateau/setPlateau.types";
 import { isOnPlateau } from "../plateau/isOnPlateau";
-import { compassDirections, NEWS, turningDirection } from "./rover.types";
-
-interface RoverPosition {
-  coOrds: Grid;
-  currentDirection: compassDirections;
-}
+import {
+  RoverPosition,
+  compassDirections,
+  NEWS,
+  turningDirection,
+} from "./rover.types";
 
 /*
 *-------------------------------*

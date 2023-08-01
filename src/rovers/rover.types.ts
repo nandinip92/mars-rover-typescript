@@ -1,4 +1,8 @@
 import { Boundary, Grid } from "../plateau/setPlateau.types";
+export interface RoverPosition {
+  coOrds: Grid;
+  currentDirection: compassDirections;
+}
 
 export type compassDirections = "N" | "E" | "S" | "W";
 export type compassDirectionType = {
