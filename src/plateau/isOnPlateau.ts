@@ -1,4 +1,4 @@
-import { Grid, Boundary, plateauShape } from "./plateau.types";
+import { Grid, PlateauCorners, plateauShape } from "./plateau.types";
 import { obstaclesOnPlateau } from "./plateau.types";
 /*
 This function is to check if the given coordinates is inside the plateau or not.
@@ -9,7 +9,7 @@ lowerBound.x <= coOrdinate.x <= upperBound.x && lowerBound.y<=coOrdinate.y<= upp
 */
 
 export function isOnPlateau(
-  plateauBoundary: Boundary,
+  plateauCorners: PlateauCorners,
   plateauShape: plateauShape,
   newCoOrdinate: Grid
 ): Boolean {
@@ -17,7 +17,7 @@ export function isOnPlateau(
   //Checking if the shape of the plateau is Square or Rectanle
   if (plateauShape === "Square" || plateauShape === "Rectangle") {
     isValidCoOrdinate = isOnSquareOrRectanglePlateau(
-      plateauBoundary,
+      plateauCorners,
       newCoOrdinate
     );
   }
@@ -25,15 +25,15 @@ export function isOnPlateau(
 }
 
 function isOnSquareOrRectanglePlateau(
-  plateauBoundary: Boundary,
+  plateauCorners: PlateauCorners,
   newCoOrdinate: Grid
 ): Boolean {
   const x =
-    plateauBoundary.lowerLeftCorner.x <= newCoOrdinate[0] &&
-    newCoOrdinate[0] <= plateauBoundary.upperRightCorner.x;
+    plateauCorners.lowerLeftCorner.x <= newCoOrdinate[0] &&
+    newCoOrdinate[0] <= plateauCorners.upperRightCorner.x;
   const y =
-    plateauBoundary.lowerLeftCorner.y <= newCoOrdinate[1] &&
-    newCoOrdinate[1] <= plateauBoundary.upperRightCorner.y;
+    plateauCorners.lowerLeftCorner.y <= newCoOrdinate[1] &&
+    newCoOrdinate[1] <= plateauCorners.upperRightCorner.y;
 
   return x && y;
 }

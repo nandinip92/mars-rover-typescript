@@ -1,4 +1,4 @@
-import { plateauShape, Boundary, Grid } from "../plateau/plateau.types";
+import { plateauShape, PlateauCorners, Grid } from "../plateau/plateau.types";
 import { isOnPlateau } from "../plateau/isOnPlateau";
 import {
   RoverPosition,
@@ -21,7 +21,7 @@ returns a the final position of the rover after processing the instructions as s
 */
 
 export function setRoverAndExecute(
-  plateauCoOrds: Boundary,
+  plateauCorners: PlateauCorners,
   plateauShape: plateauShape,
   initialPosition: RoverPosition,
   roverInstructions: string
@@ -38,7 +38,7 @@ export function setRoverAndExecute(
   instructions.forEach((direction) => {
     if (direction === "M") {
       currentCoOrds = moveRover(
-        plateauCoOrds,
+        plateauCorners,
         plateauShape,
         currentCoOrds,
         roverDirection
@@ -59,7 +59,7 @@ export function setRoverAndExecute(
  * and returns the new (X,Y) coordinates
  */
 function moveRover(
-  plateauBoundary: Boundary,
+  plateauBoundary: PlateauCorners,
   plateauShape: plateauShape,
   currentRoverCoOrds: Grid,
   currentDirection: compassDirections
