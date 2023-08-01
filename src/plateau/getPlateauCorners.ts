@@ -7,7 +7,6 @@ import { startMission } from "../index";
 'getPlateauInputs' takes the user input for the plateau coordinates and check if given coordinates are valid or not
 */
 export function getPlateauInputs(inputCoOrds: string): void {
-  //replace all the extra white spaces with exactly one space between the given input numbers
   const coOrdinates = inputCoOrds
     .replace(/\s+/g, " ") //replaces extra whitespaces to single space Eg:3   5 -> 3 5
     .trim()
