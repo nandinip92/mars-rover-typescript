@@ -1,5 +1,5 @@
 import { plateauShape, Boundary, Grid } from "../plateau/setPlateau.types";
-import { isOnPlateau } from "../plateau/isInsidePlateau";
+import { isOnPlateau } from "../plateau/isOnPlateau";
 import { compassDirections, NEWS, turningDirection } from "./rover.types";
 
 interface RoverPosition {
@@ -14,8 +14,9 @@ interface RoverPosition {
 This function will get plateauBoundary, initialPosition and roverInstructions as inputs
 1. 'plateauBoundary' is to check if the moving position is inside the plateau boundaries or not
   1(a) If yes then it will move a step ahead if not it will stay still.
-2. `initialPosition` is th estarting position of the rover and the direction it is faced Eg: { coOrds: [1, 2], currentDirection: "N" }.
-3. `roverInstructions` is the string of Instructions on how the rover should move. Eg LMLMLMLMM
+2. `plateauShape` is the shape of the boundary
+3. `initialPosition` is th estarting position of the rover and the direction it is faced Eg: { coOrds: [1, 2], currentDirection: "N" }.
+4. `roverInstructions` is the string of Instructions on how the rover should move. Eg LMLMLMLMM
 returns a the final position of the rover after processing the instructions as string Eg "5 1 N"
 */
 
