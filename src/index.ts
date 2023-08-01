@@ -23,13 +23,6 @@ export function startMission() {
     "Enter the plateau co-ordinates seperated with spaces Eg: X Y",
     getPlateauInputs
   );
-  // const plateauCorners = getPlateauCoOrdinates();
-  // const roverPosition = getRoverPosition();
-  // const instructionsToRover = getInstructions();
-  //setRoverAndExecute(plateauBoundraies, roverPositiosn, instructionsToRover);
 }
-
-function getRoverPosition() {}
-function getInstructions() {}
 
 welcomeToMarsMission();
