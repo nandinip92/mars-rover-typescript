@@ -1,4 +1,4 @@
-import { Grid, PlateauCorners, plateauShape } from "./plateau.types";
+import { Grid, PlateauCorners, PlateauShape } from "./plateau.types";
 import { obstaclesOnPlateau } from "./plateau.types";
 /*
 This function is to check if the given coordinates is inside the plateau or not.
@@ -10,7 +10,7 @@ lowerBound.x <= coOrdinate.x <= upperBound.x && lowerBound.y<=coOrdinate.y<= upp
 
 export function isOnPlateau(
   plateauCorners: PlateauCorners,
-  plateauShape: plateauShape,
+  plateauShape: PlateauShape,
   newCoOrdinate: Grid
 ): Boolean {
   let isValidCoOrdinate: Boolean = false;

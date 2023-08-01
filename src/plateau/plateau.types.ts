@@ -1,4 +1,4 @@
-export type plateauShape = "Square" | "Rectangle";
+export type PlateauShape = "Square" | "Rectangle";
 
 export type Grid = [number, number];
 

@@ -1,5 +1,5 @@
 import { clear, print, askQuestion } from "../ui/console";
-import { Grid, plateauShape, PlateauCorners } from "./plateau.types";
+import { Grid, PlateauShape, PlateauCorners } from "./plateau.types";
 import { RoverPosition } from "../rovers/rover.types";
 import { startMission } from "../index";
 
