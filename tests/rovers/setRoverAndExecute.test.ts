@@ -12,6 +12,7 @@ describe("setRoverInitialPosition", () => {
     expect(
       setRoverAndExecute(
         boundary,
+        "Square",
         { coOrds: [1, 2], currentDirection: "N" },
         "LMLMLMLMM"
       )
@@ -20,6 +21,7 @@ describe("setRoverInitialPosition", () => {
     expect(
       setRoverAndExecute(
         boundary,
+        "Square",
         { coOrds: [3, 3], currentDirection: "E" },
         "MMRMMRMRRM"
       )
@@ -34,6 +36,7 @@ describe("setRoverInitialPosition", () => {
     expect(
       setRoverAndExecute(
         boundary,
+        "Square",
         { coOrds: [2, 3], currentDirection: "S" },
         "MMMMMMMMM"
       )
@@ -42,6 +45,7 @@ describe("setRoverInitialPosition", () => {
     expect(
       setRoverAndExecute(
         boundary,
+        "Square",
         { coOrds: [3, 3], currentDirection: "E" },
         "MMMMMMMMM"
       )
@@ -56,6 +60,7 @@ describe("setRoverInitialPosition", () => {
     expect(
       setRoverAndExecute(
         boundary,
+        "Square",
         { coOrds: [2, 3], currentDirection: "W" },
         "MMMMMMMMM"
       )
@@ -63,6 +68,7 @@ describe("setRoverInitialPosition", () => {
     expect(
       setRoverAndExecute(
         boundary,
+        "Square",
         { coOrds: [-1, 3], currentDirection: "N" },
         "MMMMMMMMM"
       )
@@ -71,6 +77,7 @@ describe("setRoverInitialPosition", () => {
     expect(
       setRoverAndExecute(
         boundary,
+        "Square",
         { coOrds: [-1, -1], currentDirection: "E" },
         "MMLMRMM"
       )
