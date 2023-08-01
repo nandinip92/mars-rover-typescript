@@ -15,7 +15,7 @@ export function isOnPlateau(
 ): Boolean {
   let isValidCoOrdinate: Boolean = false;
   //Checking if the shape of the plateau is Square or Rectanle
-  if (plateauShape === "Square" || plateauShape === "Rectangle") {
+  if (plateauShape === "SQUARE" || plateauShape === "RECTANGLE") {
     isValidCoOrdinate = isOnSquareOrRectanglePlateau(
       plateauCorners,
       newCoOrdinate
