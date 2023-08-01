@@ -1,4 +1,4 @@
-import { Boundary, Grid } from "../plateau/plateau.types";
+import { PlateauCorners, Grid } from "../plateau/plateau.types";
 export interface RoverPosition {
   coOrds: Grid;
   currentDirection: compassDirections;
