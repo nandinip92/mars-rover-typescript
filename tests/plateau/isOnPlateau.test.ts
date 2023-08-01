@@ -27,8 +27,8 @@ describe("isInsidePlateau", () => {
       lowerLeftCorner: { x: 0, y: 0 },
       upperRightCorner: { x: 10, y: 4 },
     };
-    expect(isOnPlateau(boundary, "Rectangle", [1, 2])).toBe(true);
-    expect(isOnPlateau(boundary, "Rectangle", [5, 5])).toBe(true);
+    expect(isOnPlateau(boundary, "Rectangle", [6, 2])).toBe(true);
+    expect(isOnPlateau(boundary, "Rectangle", [10, 3])).toBe(true);
     expect(isOnPlateau(boundary, "Rectangle", [4, 5])).toBe(false);
     expect(isOnPlateau(boundary, "Rectangle", [12, 12])).toBe(false);
   });
