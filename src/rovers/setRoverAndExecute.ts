@@ -1,4 +1,4 @@
-import { plateauShape, Boundary, Grid } from "../plateau/setPlateau.types";
+import { plateauShape, Boundary, Grid } from "../plateau/plateau.types";
 import { isOnPlateau } from "../plateau/isOnPlateau";
 import {
   RoverPosition,

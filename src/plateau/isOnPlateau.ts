@@ -1,5 +1,5 @@
-import { Grid, Boundary, plateauShape } from "./setPlateau.types";
-import { obstaclesOnPlateau } from "./setPlateau.types";
+import { Grid, Boundary, plateauShape } from "./plateau.types";
+import { obstaclesOnPlateau } from "./plateau.types";
 /*
 This function is to check if the given coordinates is inside the plateau or not.
 And if it is an obstacle or not
