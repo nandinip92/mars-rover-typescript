@@ -1,5 +1,6 @@
 import { clear, print, askQuestion } from "./ui/console";
-import { getPlateauInputs } from "./plateau/getPlateauCorners";
+import { getPlateauInputs } from "./plateau/getPlateauInputs";
+import { PlateauCorners, PlateauShape } from "./plateau/plateau.types";
 
 function welcomeToMarsMission(): void {
   clear(false);
@@ -19,10 +20,12 @@ export function startMission() {
     `
   );
 
-  askQuestion(
-    "Enter the plateau co-ordinates seperated with spaces Eg: X Y",
-    getPlateauInputs
+  const inputCoOrds: string = askQuestion(
+    "Enter the plateau co-ordinates seperated with spaces Eg: X Y"
   );
+
+  const plateauCorners: PlateauCorners = getPlateauInputs(inputCoOrds);
+  const PlateauShape: PlateauShape = "SQUARE";
 }
 
 welcomeToMarsMission();
