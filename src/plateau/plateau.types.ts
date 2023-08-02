@@ -9,4 +9,5 @@ export type PlateauCorners = {
   upperRightCorner: CoOrds;
 };
 
-export type Obstacles = Array<Grid>;
+export type Obstacles = Array<Grid>; //💁❗FUTURE DEVELOPMENT: for obstacles
+export let obstaclesOnPlateau: Obstacles = []; //💁❗FUTURE DEVELOPMENT
