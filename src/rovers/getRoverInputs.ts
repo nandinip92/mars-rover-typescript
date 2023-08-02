@@ -1,5 +1,7 @@
 import { print } from "../ui/console";
 import { startSettingRover } from "..";
+import { getRoverInstructions } from "./getRoverInstructions";
+
 import {
   PlateauCorners,
   CoOrds,
@@ -31,23 +33,20 @@ export function getRoverInputs(
   plateauCorners: PlateauCorners,
   plateauShape: PlateauShape,
   initialPosition: string
-): RoverPosition {
-  console.log("-----GetRover-----");
+): Array<RoverPosition | string> {
+  //console.log("-----GetRover-----");
   const [coOrds, currentDirection] = isValidInputFormat(
     plateauCorners,
     plateauShape,
     initialPosition
   );
-  return {
+  const roverPosition = {
     coOrds: coOrds as Grid,
     currentDirection: currentDirection as compassDirections,
   };
+  const roverInstructions = getRoverInstructions();
+  return [roverPosition, roverInstructions];
 }
-
-//const roverInstructions = instructions.replace(/\s+/g, "").split("");
-// if (isValidPositon(givenPosition) && isValidInstruction(roverInstructions)) {
-//   //  setRoverAndExecute(plateauBoundary, givenPosition, roverInstructions);
-// }
 
 function isValidInputFormat(
   plateauCorners: PlateauCorners,
@@ -96,8 +95,8 @@ function isValidPositon(givenPosition: Array<string | number>): boolean {
     return false;
   }
   if (
-    typeof givenPosition[0] === "number" &&
-    typeof givenPosition[1] === "number"
+    typeof givenPosition[0] !== "number" ||
+    typeof givenPosition[1] !== "number"
   ) {
     print(
       "🚫🚫🚫Invalid input. Input must contain X and Y co-ordinates and they must be numbers🚫🚫🚫"
@@ -113,14 +112,5 @@ function isValidPositon(givenPosition: Array<string | number>): boolean {
     return false;
   }
 
-  return true;
-}
-
-function isValidInstruction(roverInstructions: Array<string>): boolean {
-  const isValid = roverInstructions.map((i) => ["L", "R", "M"].includes(i));
-  if (!isValid.every(Boolean))
-    throw new Error(
-      "Invalid Input, please enter Valid instructions [L | R |M]"
-    );
   return true;
 }
