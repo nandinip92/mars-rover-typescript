@@ -9,4 +9,4 @@ export type PlateauCorners = {
   upperRightCorner: CoOrds;
 };
 
-type Obstacles = Array<Grid>;
+export type Obstacles = Array<Grid>;
