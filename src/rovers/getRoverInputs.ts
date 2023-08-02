@@ -1,6 +1,13 @@
-import { Boundary, CoOrds } from "../plateau/setPlateau.types";
-import { isInsidePlateau } from "../plateau/isInsidePlateau";
-import { setRoverAndExecute } from "../rovers/setRoverAndExecute";
+import { print } from "../ui/console";
+import { startSettingRover } from "..";
+import {
+  PlateauCorners,
+  CoOrds,
+  PlateauShape,
+  Grid,
+} from "../plateau/plateau.types";
+import { isOnPlateau } from "../plateau/isOnPlateau";
+import { RoverPosition, compassDirections } from "./rover.types";
 
 // type compassDirections = "N" | "E" | "S" | "W";
 // type RoverPosition = { coOrds: CoOrds; currentDirection: compassDirections };
@@ -21,39 +28,92 @@ import { setRoverAndExecute } from "../rovers/setRoverAndExecute";
 
 //This function will check if the given input position of the rover is  valid or not
 export function getRoverInputs(
-  plateauBoundary: Boundary,
-  initialPosition: string,
-  instructions: string
-) {
+  plateauCorners: PlateauCorners,
+  plateauShape: PlateauShape,
+  initialPosition: string
+): RoverPosition {
+  console.log(arguments.callee.name);
+
+  const [coOrds, currentDirection] = isValidInputFormat(
+    plateauCorners,
+    plateauShape,
+    initialPosition
+  );
+  return {
+    coOrds: coOrds as Grid,
+    currentDirection: currentDirection as compassDirections,
+  };
+}
+
+//const roverInstructions = instructions.replace(/\s+/g, "").split("");
+// if (isValidPositon(givenPosition) && isValidInstruction(roverInstructions)) {
+//   //  setRoverAndExecute(plateauBoundary, givenPosition, roverInstructions);
+// }
+
+function isValidInputFormat(
+  plateauCorners: PlateauCorners,
+  plateauShape: PlateauShape,
+  initialPosition: string
+): Array<Grid | string> {
+  console.log(arguments.callee.name);
+
   let givenPosition = initialPosition
     .replace(/\s+/g, " ") //If the given input has more spaces between the characters this will replace them into one space
     .trim()
     .split(" ")
     .map((ele) => (isNaN(parseInt(ele)) ? ele : parseInt(ele))); //Convering digits from string to number and leaves strings as is
 
-  const roverInstructions = instructions.replace(/\s+/g, "").split("");
-
-  if (isValidPositon(givenPosition) && isValidInstruction(roverInstructions)) {
-    setRoverAndExecute(plateauBoundary, givenPosition, roverInstructions);
+  console.log("gicenPosition-->", givenPosition);
+  if (!isValidPositon) {
+    print("➡️PleaseCheck the Note below 👇 and enter valid input ");
+    startSettingRover(plateauCorners, plateauShape, true); // ❌ERROR: so Start settign rover again
   }
+
+  // Since given input format is valid i.e, Eg: 1 2 N
+  //check if the given coordinates(first two elements of the array) is on the plateau or not
+  // if it is on plateau it isvalidCoordinate
+  //else invalid position
+  const xCoOrd: number = givenPosition[0] as number;
+  const yCoOrd: number = givenPosition[1] as number;
+  const isValidCoOrd = isOnPlateau(plateauCorners, plateauShape, [
+    xCoOrd,
+    yCoOrd,
+  ]);
+  if (!isValidCoOrd) {
+    print(
+      "🚫🚫🚫 Given coordinates of the Rover is not on the plateau. Please give valid coOrdinates 🚫🚫🚫"
+    );
+    startSettingRover(plateauCorners, plateauShape, true); // ❌ERROR: so Start settign rover again
+  }
+
+  return [[xCoOrd, yCoOrd], givenPosition[2] as string];
 }
 
 function isValidPositon(givenPosition: Array<string | number>): boolean {
-  if (givenPosition.length < 3 || givenPosition.length > 3)
-    throw new Error(
-      "Invalid input. Input must contain X and Y co-ordinates and a compass direction (N|E|S|W) seperated by space - X Y Direction"
+  console.log(arguments.callee.name);
+  if (givenPosition.length !== 3) {
+    print(
+      "🚫🚫🚫 Invalid input. Input must contain X and Y co-ordinates and a compass direction (N|E|S|W) seperated by space - X Y Direction🚫🚫🚫"
     );
+    return false;
+  }
   if (
-    typeof givenPosition[2] === "number" ||
-    typeof givenPosition[1] === "string" ||
-    typeof givenPosition[1] === "string"
-  )
-    throw new Error(
-      "Invalid input. Input must contain X and Y co-ordinates and a compass direction (N|E|S|W) seperated by space - X Y Direction"
+    typeof givenPosition[0] === "number" &&
+    typeof givenPosition[1] === "number"
+  ) {
+    print(
+      "🚫🚫🚫Invalid input. Input must contain X and Y co-ordinates and they must be numbers🚫🚫🚫"
     );
+    return false;
+  }
   let directions = ["N", "E", "S", "W"];
-  if (!directions.includes(givenPosition[2]))
-    throw new Error("Invalid input. compass direction must be (N|E|S|W)");
+  if (
+    typeof givenPosition[2] === "string" &&
+    !directions.includes(givenPosition[2])
+  ) {
+    print("🚫🚫🚫Invalid input. compass direction must be (N|E|S|W)🚫🚫🚫");
+    return false;
+  }
 
   return true;
 }
