@@ -21,7 +21,7 @@ export function isOnPlateau(
       newCoOrdinate
     );
   }
-  return isValidCoOrdinate && isObstacle(newCoOrdinate);
+  return isValidCoOrdinate && isNotObstacle(newCoOrdinate);
 }
 
 function isOnSquareOrRectanglePlateau(
@@ -38,7 +38,7 @@ function isOnSquareOrRectanglePlateau(
   return x && y;
 }
 
-function isObstacle(newCoOrd: Grid): Boolean {
+function isNotObstacle(newCoOrd: Grid): Boolean {
   //'obstaclesOnPlateau' contains the list of plateau coordinates that has obstacles. it is Array<Grid> type.
   // if the newCoOrdinates are present in the Obstacles Array it will return 'false' -->its is an obstacle
   //else 'true' -->it is an emptyspace
