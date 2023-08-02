@@ -1,6 +1,11 @@
 import { clear, print, askQuestion } from "./ui/console";
 import { getPlateauInputs } from "./plateau/getPlateauInputs";
-import { PlateauCorners, PlateauShape } from "./plateau/plateau.types";
+import {
+  PlateauCorners,
+  PlateauShape,
+  obstaclesOnPlateau,
+} from "./plateau/plateau.types";
+//export let obstaclesOnPlateau: Obstacles = [];
 
 function welcomeToMarsMission(): void {
   clear(false);
@@ -24,8 +29,9 @@ export function startMission() {
     "Enter the plateau co-ordinates seperated with spaces Eg: X Y"
   );
 
-  const plateauCorners: PlateauCorners = getPlateauInputs(inputCoOrds);
-  const PlateauShape: PlateauShape = "SQUARE";
+  const [plateauCorners, plateauShape, obstacles] =
+    getPlateauInputs(inputCoOrds);
+  //console.log([plateauCorners, plateauShape, obstacles]);
 }
 
 welcomeToMarsMission();
