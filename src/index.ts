@@ -60,7 +60,6 @@ export function startSettingRover(
   plateauShape: PlateauShape,
   flag: Boolean
 ): void {
-  console.log(plateauCorners);
   //if this function is called for the first time or when given invalid inputs
   // then display ❗Note on how to given rover values
   //else prompt the user about next steps.
