@@ -86,8 +86,6 @@ function isValidInputFormat(
 }
 
 function isValidPositon(givenPosition: Array<string | number>): boolean {
-  console.log("----isValidPositon----");
-  console.log(givenPosition);
   // givenPosition length must be 3
   if (givenPosition.length !== 3) {
     print(
