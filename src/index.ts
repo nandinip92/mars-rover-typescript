@@ -1,15 +1,14 @@
 import { clear, print, askQuestion } from "./ui/console";
 import { getPlateauInputs } from "./plateau/getPlateauInputs";
+import { getRoverInputs } from "./rovers/getRoverInputs";
+import { setRoverAndExecute } from "./rovers/setRoverAndExecute";
+import { RoverPosition } from "./rovers/rover.types";
 import {
   PlateauCorners,
   PlateauShape,
   Obstacles,
   obstaclesOnPlateau,
 } from "./plateau/plateau.types";
-import { getRoverInputs } from "./rovers/getRoverInputs";
-import { setRoverAndExecute } from "./rovers/setRoverAndExecute";
-import { RoverPosition } from "./rovers/rover.types";
-
 type YesOrNo = "Y" | "N";
 // interface inputsToPlateau {
 //   plateauCorners: PlateauCorners;
@@ -76,12 +75,19 @@ export function startSettingRover(
     "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
   );
 
-  const roverPosition: RoverPosition = getRoverInputs(
+  const [roverPosition, roverInstructions] = getRoverInputs(
     plateauCorners,
     plateauShape,
     inputPosition
   );
   console.log(roverPosition);
+  console.log(roverInstructions);
+
+  // const inputInstructions = askQuestion(
+  //   "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
+  // );
+
+  // const roverInstructions: string = getRoverInstructions(inputInstructions);
   // else {
   //   const userResponse = askQuestion(
   //     "Do you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
