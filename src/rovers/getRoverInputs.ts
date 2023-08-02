@@ -32,8 +32,6 @@ export function getRoverInputs(
   plateauShape: PlateauShape,
   initialPosition: string
 ): RoverPosition {
-  console.log(arguments.callee.name);
-
   const [coOrds, currentDirection] = isValidInputFormat(
     plateauCorners,
     plateauShape,
@@ -55,15 +53,12 @@ function isValidInputFormat(
   plateauShape: PlateauShape,
   initialPosition: string
 ): Array<Grid | string> {
-  console.log(arguments.callee.name);
-
   let givenPosition = initialPosition
     .replace(/\s+/g, " ") //If the given input has more spaces between the characters this will replace them into one space
     .trim()
     .split(" ")
     .map((ele) => (isNaN(parseInt(ele)) ? ele : parseInt(ele))); //Convering digits from string to number and leaves strings as is
 
-  console.log("gicenPosition-->", givenPosition);
   if (!isValidPositon) {
     print("➡️PleaseCheck the Note below 👇 and enter valid input ");
     startSettingRover(plateauCorners, plateauShape, true); // ❌ERROR: so Start settign rover again
@@ -90,7 +85,6 @@ function isValidInputFormat(
 }
 
 function isValidPositon(givenPosition: Array<string | number>): boolean {
-  console.log(arguments.callee.name);
   if (givenPosition.length !== 3) {
     print(
       "🚫🚫🚫 Invalid input. Input must contain X and Y co-ordinates and a compass direction (N|E|S|W) seperated by space - X Y Direction🚫🚫🚫"

@@ -3,9 +3,21 @@ import { getPlateauInputs } from "./plateau/getPlateauInputs";
 import {
   PlateauCorners,
   PlateauShape,
+  Obstacles,
   obstaclesOnPlateau,
 } from "./plateau/plateau.types";
-//export let obstaclesOnPlateau: Obstacles = [];
+import { getRoverInputs } from "./rovers/getRoverInputs";
+import { setRoverAndExecute } from "./rovers/setRoverAndExecute";
+import { RoverPosition } from "./rovers/rover.types";
+
+type YesOrNo = "Y" | "N";
+// interface inputsToPlateau {
+//   plateauCorners: PlateauCorners;
+//   plateauShape: PlateauShape;
+//   obstacles: Obstacles;
+// }
+type PlateauInputs = PlateauCorners | PlateauShape | Obstacles;
+type PlateauInputType = Array<PlateauInputs>;
 
 function welcomeToMarsMission(): void {
   clear(false);
@@ -32,6 +44,63 @@ export function startMission() {
   const [plateauCorners, plateauShape, obstacles] =
     getPlateauInputs(inputCoOrds);
   //console.log([plateauCorners, plateauShape, obstacles]);
+
+  //'flag' value is to used to check if the Rover is being placed on a new plateau or on the same plateau
+  const flag = true;
+  //Now start taking inputs for the rover
+  startSettingRover(
+    plateauCorners as PlateauCorners,
+    plateauShape as PlateauShape,
+    flag
+  );
 }
 
+export function startSettingRover(
+  plateauCorners: PlateauCorners,
+  plateauShape: PlateauShape,
+  flag: Boolean
+): void {
+  console.log(plateauCorners);
+  //if this function is called for the first time or when given invalid inputs
+  // then display ❗Note on how to given rover values
+  //else prompt the user about next steps.
+  if (flag) {
+    print(`❗NOTE: To move the 🦸Rover🦸 we need its current coordinates of the plateau along with the direction it is facing.
+              And we need a set of instruction on to maneuver the 🦸Rover🦸. Input formats are given below:
+            1️⃣ For the Rover position should be (X,Y) coordiates followed by compass direction N⬆️|E➡️|⬅️W|S⬇️ seperateby a space
+               Eg: 1 2 N
+            2️⃣Movement instructionsshould contain on L, R and M (L-Left, R-Right, M-Move) Eg: LMLMLMLMM
+            `);
+  }
+
+  const inputPosition = askQuestion(
+    "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
+  );
+
+  const roverPosition: RoverPosition = getRoverInputs(
+    plateauCorners,
+    plateauShape,
+    inputPosition
+  );
+  console.log(roverPosition);
+  // else {
+  //   const userResponse = askQuestion(
+  //     "Do you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
+  //   );
+  //   // if the user doesnot wish to continue on the same plateau then start the mission again.
+  //   if (checkResponse(userResponse) === "N") startMission();
+  // }
+}
+function checkResponse(userResponse: string): YesOrNo {
+  userResponse.trim();
+  if (
+    userResponse.toUpperCase() === "Y" ||
+    userResponse.toUpperCase() === "YES"
+  )
+    return "Y";
+  if (userResponse.toUpperCase() === "N" || userResponse.toUpperCase() === "NO")
+    return "N";
+  print("❌ Invalid input  ");
+  return "N";
+}
 welcomeToMarsMission();
