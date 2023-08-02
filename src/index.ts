@@ -80,8 +80,16 @@ export function startSettingRover(
     plateauShape,
     inputPosition
   );
-  console.log(roverPosition);
-  console.log(roverInstructions);
+  // console.log(roverPosition);
+  // console.log(roverInstructions);
+
+  const latestPosition = setRoverAndExecute(
+    plateauCorners,
+    plateauShape,
+    roverPosition as RoverPosition,
+    roverInstructions as string
+  );
+  console.log(`Rovers new position is ${latestPosition}`);
 
   // const inputInstructions = askQuestion(
   //   "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
@@ -96,6 +104,8 @@ export function startSettingRover(
   //   if (checkResponse(userResponse) === "N") startMission();
   // }
 }
+
+////💁❗FUTURE DEVELOPMENT: looping through console
 function checkResponse(userResponse: string): YesOrNo {
   userResponse.trim();
   if (
