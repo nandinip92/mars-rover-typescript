@@ -86,9 +86,10 @@ function isValidInputFormat(
 }
 
 function isValidPositon(givenPosition: Array<string | number>): boolean {
-  // console.log("----isValidPositon----");
+  console.log("----isValidPositon----");
+  console.log(givenPosition);
   // givenPosition length must be 3
-  if (givenPosition.length > 3 || givenPosition.length < 3) {
+  if (givenPosition.length !== 3) {
     print(
       "🚫🚫🚫 Invalid input. Input must contain X and Y co-ordinates and a compass direction (N|E|S|W) seperated by space - X Y Direction🚫🚫🚫"
     );
