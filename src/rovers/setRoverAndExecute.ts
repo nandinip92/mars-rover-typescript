@@ -30,7 +30,8 @@ export function setRoverAndExecute(
   let roverDirection = initialPosition.currentDirection; //Eg: N
   let currentCoOrds = initialPosition.coOrds; //Eg: [1,2]
   //Splitting the string of instructions into an array
-  let instructions = roverInstructions.split(""); //Eg: [L,M,L,M,L,M,L,M,M]
+  const instructions = roverInstructions.split(""); //Eg: [L,M,L,M,L,M,L,M,M]
+  //console.log(instructions)
 
   //Looping each instruction and executing them [L,M,L,M,L,M,L,M,M]
   // if direction === M then move the rover in the current direction by 1
