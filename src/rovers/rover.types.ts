@@ -1,4 +1,8 @@
 import { PlateauCorners, Grid } from "../plateau/plateau.types";
+
+export type RoverERRORS =
+  | "INVALID_ROVER_POSITION"
+  | "INVALID_ROVER_INSTRUCTION";
 export interface RoverPosition {
   coOrds: Grid;
   currentDirection: compassDirections;
