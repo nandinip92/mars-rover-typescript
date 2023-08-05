@@ -34,7 +34,7 @@ export function getRoverPosition(
     plateauShape,
     initialPosition
   );
-  // console.log("isValidCoOrds", isValidCoOrds);
+
   let roverPosition = {};
   if (isValidCoOrds === "INVALID_ROVER_POSITION") return isValidCoOrds;
   else {
