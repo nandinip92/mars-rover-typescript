@@ -1,4 +1,4 @@
-import { getRoverPosition } from "../../src/rovers/getRoverInputs";
+import { getRoverPosition } from "../../src/rovers/getRoverPosition";
 
 describe("getPlateauInputs", () => {
   test("Returns Valid rover Position", () => {
