@@ -1,4 +1,3 @@
-import exp from "constants";
 import { getPlateauInputs } from "../../src/plateau/getPlateauInputs";
 
 describe("getPlateauInputs", () => {
