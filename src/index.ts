@@ -1,14 +1,15 @@
 import { clear, print, askQuestion } from "./ui/console";
 import { getPlateauInputs } from "./plateau/getPlateauInputs";
-import { getRoverInputs } from "./rovers/getRoverInputs";
+import { getRoverPosition } from "./rovers/getRoverPosition";
 import { setRoverAndExecute } from "./rovers/setRoverAndExecute";
-import { RoverPosition } from "./rovers/rover.types";
+import { RoverPosition, RoverERRORS } from "./rovers/rover.types";
 import {
   PlateauCorners,
   PlateauShape,
   Obstacles,
   obstaclesOnPlateau,
 } from "./plateau/plateau.types";
+import { getRoverInstructions } from "./rovers/getRoverInstructions";
 type YesOrNo = "Y" | "N";
 // interface inputsToPlateau {
 //   plateauCorners: PlateauCorners;
@@ -67,7 +68,7 @@ export function startSettingRover(
   // then display ❗Note on how to given rover values
   //else prompt the user about next steps.
   if (flag) {
-    print(`\nNOTE: To move the 🦸Rover🦸 we need its current coordinates of the plateau along with the direction it is facing.
+    print(`\n❗NOTE: To move the 🦸Rover🦸 we need its current coordinates of the plateau along with the direction it is facing.
               And we need a set of instruction on to maneuver the 🦸Rover🦸. Input formats are given below:
             1️⃣ For the Rover position should be (X,Y) coordiates followed by compass direction N⬆️|E➡️|⬅️W|S⬇️ seperateby a space
                Eg: 1 2 N
@@ -85,13 +86,20 @@ export function startSettingRover(
     "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
   );
 
-  const [roverPosition, roverInstructions] = getRoverInputs(
+  const roverPosition = getRoverPosition(
     plateauCorners,
     plateauShape,
     inputPosition
   );
-  // console.log(roverPosition);
-  // console.log(roverInstructions);
+  if (roverPosition === "INVALID_ROVER_POSITION") {
+    startSettingRover(plateauCorners, plateauShape, true);
+    return;
+  }
+  let roverInstructions = "INVALID_ROVER_INSTRUCTION";
+  //This will prompt for Valid Instructions untill one is given
+  while (roverInstructions === "INVALID_ROVER_INSTRUCTION") {
+    roverInstructions = getRoverInstructions();
+  }
 
   const latestPosition = setRoverAndExecute(
     plateauCorners,
@@ -102,7 +110,7 @@ export function startSettingRover(
   console.log(`Rovers new position is ${latestPosition}`);
 }
 
-////💁❗FUTURE DEVELOPMENT: looping through console
+////💁❗FUTURE DEVELOPMENT: looping through mission
 function checkResponse(userResponse: string): YesOrNo {
   userResponse.trim();
   if (
