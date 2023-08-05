@@ -1,4 +1,3 @@
-import exp from "constants";
 import { isOnPlateau } from "../../src/plateau/isOnPlateau";
 
 describe("isInsidePlateau", () => {
