@@ -62,10 +62,10 @@ function isValidInputFormat(
     .trim()
     .split(" ")
     .map((ele) => (isNaN(parseInt(ele)) ? ele : parseInt(ele))); //Convering digits from string to number and leaves strings as is
-  console.log(givenPosition);
+  //console.log(givenPosition);
 
   if (!isValidPositon(givenPosition)) {
-    print("➡️PleaseCheck the Note below 👇 and enter valid input ");
+    print("➡️PleaseCheck the❗Note❗below 👇 and enter valid input ");
     // startSettingRover(plateauCorners, plateauShape, true); // ❌ERROR: so Start settign rover again
     return "INVALID_ROVER_POSITION"; // ❌ERROR: so Start settign rover again. this will indicate to startSettingRover() in index.ts
   }
@@ -109,7 +109,7 @@ function isValidPositon(givenPosition: Array<string | number>): boolean {
   }
   let directions = ["N", "E", "S", "W"];
   if (
-    typeof givenPosition[2] === "string" &&
+    typeof givenPosition[2] !== "string" ||
     !directions.includes(givenPosition[2])
   ) {
     print("🚫🚫🚫Invalid input. compass direction must be (N|E|S|W)🚫🚫🚫");
