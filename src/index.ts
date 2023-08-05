@@ -74,13 +74,13 @@ export function startSettingRover(
                Eg: 1 2 N
             2️⃣Movement instructionsshould contain on L, R and M (L-Left, R-Right, M-Move) Eg: LMLMLMLMM
             `);
-  } // else {
-  //   const userResponse = askQuestion(
-  //     "Do you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
-  //   );
-  //   // if the user doesnot wish to continue on the same plateau then start the mission again.
-  //   if (checkResponse(userResponse) === "N") startMission();
-  // }
+  } else {
+    const userResponse = askQuestion(
+      "Do you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
+    );
+    // if the user doesnot wish to continue on the same plateau then start the mission again.
+    if (checkResponse(userResponse) === "N") welcomeToMarsMission();
+  }
 
   const inputPosition = askQuestion(
     "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
@@ -107,7 +107,9 @@ export function startSettingRover(
     roverPosition as RoverPosition,
     roverInstructions as string
   );
-  console.log(`Rovers new position is ${latestPosition}`);
+  console.log(`🏁🏁🏁🦸Rover's New position🦸🏁🏁🏁 ${latestPosition}`);
+
+  startSettingRover(plateauCorners, plateauShape, false);
 }
 
 ////💁❗FUTURE DEVELOPMENT: looping through mission
