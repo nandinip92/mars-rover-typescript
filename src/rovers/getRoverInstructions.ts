@@ -1,29 +1,29 @@
 import { askQuestion, print } from "../ui/console";
+import { RoverERRORS } from "./rover.types";
 
 /*
 `isValidInstruction` checks if the instruction is valid or not.
 
 Instruction must contain only L,R and M
 */
-let validInstruction = "";
-export function getRoverInstructions() {
+
+export function getRoverInstructions(): string | RoverERRORS {
   const instruction = askQuestion("Enter Rover instructions");
-  isValidInstruction(instruction);
+  const validInstruction = isValidInstruction(instruction);
   return validInstruction;
 }
 
-function isValidInstruction(instructions: string): string {
-  const roverInstructions = instructions.replace(/\s+/g, "");
+export function isValidInstruction(instructions: string): string {
+  const roverInstructions = instructions.replace(/\s+/g, "").trim();
   const isValidInstruction = roverInstructions
     .split("")
     .map((i) => ["L", "R", "M"].includes(i));
 
   if (!isValidInstruction.every(Boolean)) {
     print(
-      "🚫🚫🚫Invalid Input, please enter Valid instructions [L | R |M] eEg:LMLLRMM🚫🚫🚫"
+      "\n🚫🚫🚫Invalid Input, please enter Valid instructions [L | R |M] eEg:LMLLRMM🚫🚫🚫"
     );
-    return getRoverInstructions(); // ❌ERROR: so get correct inputs
+    return "INVALID_ROVER_INSTRUCTION"; // ❌ERROR: so get correct inputs -> this will prompt for valid inputs untill you enter one
   }
-  validInstruction = roverInstructions;
-  return validInstruction;
+  return roverInstructions;
 }
