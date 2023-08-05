@@ -39,7 +39,7 @@ export function getPlateauInputs(
       "\n🚫🚫🚫 Invalid input, please check the❗NOTE❗below and give valid inputs 🚫🚫🚫"
     );
     //    startMission();
-    return "INVALID_INPUT";
+    return "INVALID_INPUT"; // ❌ERROR: this will indicate to startMission() in index.ts
   }
   const plateauCorners = getPlateauCorners(coOrdinates as Array<number>);
   const plateauShape = getPlateauShape();
@@ -49,7 +49,7 @@ export function getPlateauInputs(
     plateauShape === "INVALID_INPUT" ||
     obs === "INVALID_INPUT"
   ) {
-    return "INVALID_INPUT";
+    return "INVALID_INPUT"; // ❌ERROR: this will indicate to startMission() in index.ts
   }
   return [plateauCorners, plateauShape, obs];
 }

@@ -64,8 +64,8 @@ function isValidCoOrdinates(
     print(
       `\n🚫🚫🚫 Invalid input, upper-right corner coOrdinates must always be greater than lower-left corner coOrdinates.
       \tPlease check the❗NOTE❗below and give valid inputs 🚫🚫🚫`
-    ); // ❌ERROR: so Start again
-    return "INVALID_INPUT";
+    );
+    return "INVALID_INPUT"; // ❌ERROR: this will indicate to startMission() in index.ts
   }
   //initializing the plateauCorners dictionary
   const plateauCorners: PlateauCorners = {
