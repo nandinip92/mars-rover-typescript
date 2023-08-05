@@ -9,23 +9,8 @@ import { RoverPosition } from "../rovers/rover.types";
 import { startMission } from "../index";
 
 /*
-'getPlateauCorners' takes the array of plateau coordinates and check if given coordinates are valid or not
-*/
-export function getPlateauCorners(
-  coOrdinates: Array<number>
-): PlateauCorners | PlateauERROR {
-  // if coOrdinates.length === 2 then pass only upperRight coordinates into 'isValidCoOrdinates()'
-  // else pass both upperRight coordinates and lowerLeft coordinates into 'isValidCoOrdinates()'
-  // return value will assigned to 'plateauCorners' variable
-  const plateauCorners =
-    coOrdinates.length === 2
-      ? isValidCoOrdinates([coOrdinates[0] as number, coOrdinates[1] as number])
-      : isValidCoOrdinates(
-          [coOrdinates[2] as number, coOrdinates[3] as number],
-          [coOrdinates[0] as number, coOrdinates[1] as number]
-        );
-  return plateauCorners;
-}
+'getPlateauCorners' takes the array of plateau coordinates and check if given coordinates are valid or not.
+It will take an Array<numbers> as an input and its length will be either 2 or 4 
 
 /*
 RULES:
@@ -42,9 +27,30 @@ Assuming the lower-left corner to be (0,0) as an example
 Just in case if in future lowerleft co0ordinates are not fixed on origin[0,0], setting the lowerLeftCorner as an optional parameter
 3. Setting the lowerBound and upperBound coordinates for the Plateau.This helps while moving the Rover as it should be within the platues boundaries.
 
-lowerLeftCorner --> OptionalInput,
-upperRightCorner --->Input
+
 */
+
+export function getPlateauCorners(
+  coOrdinates: Array<number>
+): PlateauCorners | PlateauERROR {
+  // if coOrdinates.length === 2 then set lowerLeft coOrdinates to [0,0] and given coordinates to upperRight
+  // else pass both upperRight coordinates and lowerLeft coordinates into 'isValidCoOrdinates()'
+  // return the value that is assigned to 'plateauCorners' variable
+  let plateauCorners;
+  if (coOrdinates.length === 2) {
+    plateauCorners = {
+      lowerLeftCorner: { x: 0, y: 0 },
+      upperRightCorner: { x: coOrdinates[0], y: coOrdinates[1] },
+    };
+  } else {
+    plateauCorners = isValidCoOrdinates(
+      [coOrdinates[2] as number, coOrdinates[3] as number],
+      [coOrdinates[0] as number, coOrdinates[1] as number]
+    );
+  }
+  return plateauCorners;
+}
+
 function isValidCoOrdinates(
   upperRightCorner: Grid,
   lowerLeftCorner?: Grid
