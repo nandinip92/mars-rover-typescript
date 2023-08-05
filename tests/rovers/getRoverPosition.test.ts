@@ -66,12 +66,21 @@ describe("getPlateauInputs", () => {
     expect(funcOutput).toEqual("INVALID_ROVER_POSITION");
 
     //ACT
-    funcOutput = getRoverPosition(plateauCorner, "SQUARE", "12 N N ");
+    funcOutput = getRoverPosition(plateauCorner, "SQUARE", "1 2 3");
+    //ASSERT
+    expect(funcOutput).toEqual("INVALID_ROVER_POSITION");
+
+    //ACT
+    funcOutput = getRoverPosition(plateauCorner, "SQUARE", "12 H J ");
     //ASSERT
     expect(funcOutput).toEqual("INVALID_ROVER_POSITION");
 
     //ACT
     funcOutput = getRoverPosition(plateauCorner, "SQUARE", "1 2 N N ");
+    //ASSERT
+    expect(funcOutput).toEqual("INVALID_ROVER_POSITION");
+    //ACT
+    funcOutput = getRoverPosition(plateauCorner, "SQUARE", "3 3 E E");
     //ASSERT
     expect(funcOutput).toEqual("INVALID_ROVER_POSITION");
   });
