@@ -40,18 +40,22 @@ export function startMission() {
     "Enter the plateau co-ordinates seperated with spaces Eg: X Y"
   );
 
-  const [plateauCorners, plateauShape, obstacles] =
-    getPlateauInputs(inputCoOrds);
-  //console.log([plateauCorners, plateauShape, obstacles]);
+  const plateauInputs = getPlateauInputs(inputCoOrds);
 
-  //'flag' value is to used to check if the Rover is being placed on a new plateau or on the same plateau
-  const flag = true;
-  //Now start taking inputs for the rover
-  startSettingRover(
-    plateauCorners as PlateauCorners,
-    plateauShape as PlateauShape,
-    flag
-  );
+  if (plateauInputs === "INVALID_INPUT") startMission();
+  else {
+    let [plateauCorners, plateauShape, obstacles] = plateauInputs;
+    //console.log([plateauCorners, plateauShape, obstacles]);
+
+    //'flag' value is to used to check if the Rover is being placed on a new plateau or on the same plateau
+    const flag = true;
+    //Now start taking inputs for the rover
+    startSettingRover(
+      plateauCorners as PlateauCorners,
+      plateauShape as PlateauShape,
+      flag
+    );
+  }
 }
 
 export function startSettingRover(
@@ -63,13 +67,19 @@ export function startSettingRover(
   // then display ❗Note on how to given rover values
   //else prompt the user about next steps.
   if (flag) {
-    print(`❗NOTE: To move the 🦸Rover🦸 we need its current coordinates of the plateau along with the direction it is facing.
+    print(`\nNOTE: To move the 🦸Rover🦸 we need its current coordinates of the plateau along with the direction it is facing.
               And we need a set of instruction on to maneuver the 🦸Rover🦸. Input formats are given below:
             1️⃣ For the Rover position should be (X,Y) coordiates followed by compass direction N⬆️|E➡️|⬅️W|S⬇️ seperateby a space
                Eg: 1 2 N
             2️⃣Movement instructionsshould contain on L, R and M (L-Left, R-Right, M-Move) Eg: LMLMLMLMM
             `);
-  }
+  } // else {
+  //   const userResponse = askQuestion(
+  //     "Do you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
+  //   );
+  //   // if the user doesnot wish to continue on the same plateau then start the mission again.
+  //   if (checkResponse(userResponse) === "N") startMission();
+  // }
 
   const inputPosition = askQuestion(
     "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
@@ -90,19 +100,6 @@ export function startSettingRover(
     roverInstructions as string
   );
   console.log(`Rovers new position is ${latestPosition}`);
-
-  // const inputInstructions = askQuestion(
-  //   "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
-  // );
-
-  // const roverInstructions: string = getRoverInstructions(inputInstructions);
-  // else {
-  //   const userResponse = askQuestion(
-  //     "Do you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
-  //   );
-  //   // if the user doesnot wish to continue on the same plateau then start the mission again.
-  //   if (checkResponse(userResponse) === "N") startMission();
-  // }
 }
 
 ////💁❗FUTURE DEVELOPMENT: looping through console

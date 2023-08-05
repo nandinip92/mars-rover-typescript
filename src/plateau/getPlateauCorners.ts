@@ -1,16 +1,23 @@
 import { clear, print, askQuestion } from "../ui/console";
-import { Grid, PlateauShape, PlateauCorners } from "./plateau.types";
+import {
+  Grid,
+  PlateauShape,
+  PlateauCorners,
+  PlateauERROR,
+} from "./plateau.types";
 import { RoverPosition } from "../rovers/rover.types";
 import { startMission } from "../index";
 
 /*
 'getPlateauCorners' takes the array of plateau coordinates and check if given coordinates are valid or not
 */
-export function getPlateauCorners(coOrdinates: Array<number>): PlateauCorners {
+export function getPlateauCorners(
+  coOrdinates: Array<number>
+): PlateauCorners | PlateauERROR {
   // if coOrdinates.length === 2 then pass only upperRight coordinates into 'isValidCoOrdinates()'
   // else pass both upperRight coordinates and lowerLeft coordinates into 'isValidCoOrdinates()'
   // return value will assigned to 'plateauCorners' variable
-  const plateauCorners: PlateauCorners =
+  const plateauCorners =
     coOrdinates.length === 2
       ? isValidCoOrdinates([coOrdinates[0] as number, coOrdinates[1] as number])
       : isValidCoOrdinates(
@@ -41,7 +48,7 @@ upperRightCorner --->Input
 function isValidCoOrdinates(
   upperRightCorner: Grid,
   lowerLeftCorner?: Grid
-): PlateauCorners {
+): PlateauCorners | PlateauERROR {
   const lowerLeft = lowerLeftCorner === undefined ? [0, 0] : lowerLeftCorner;
   //upper right coordinates must always be greater than the lower left coordinates
   if (
@@ -52,7 +59,7 @@ function isValidCoOrdinates(
       `\n🚫🚫🚫 Invalid input, upper-right corner coOrdinates must always be greater than lower-left corner coOrdinates.
       \tPlease check the❗NOTE❗below and give valid inputs 🚫🚫🚫`
     ); // ❌ERROR: so Start again
-    startMission();
+    return "INVALID_INPUT";
   }
   //initializing the plateauCorners dictionary
   const plateauCorners: PlateauCorners = {

@@ -9,5 +9,6 @@ export type PlateauCorners = {
   upperRightCorner: CoOrds;
 };
 
+export type PlateauERROR = "INVALID_INPUT";
 export type Obstacles = Array<Grid>; //💁❗FUTURE DEVELOPMENT: for obstacles
 export let obstaclesOnPlateau: Obstacles = []; //💁❗FUTURE DEVELOPMENT
