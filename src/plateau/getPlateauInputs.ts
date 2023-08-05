@@ -32,9 +32,8 @@ export function getPlateauInputs(
     .map((ele) => (isNaN(parseInt(ele)) ? ele : parseInt(ele))); //converts every digit in the sting into number
 
   if (
-    !coOrdinates.every(Number) &&
-    coOrdinates.length !== 4 &&
-    coOrdinates.length !== 2
+    !coOrdinates.every(Number) ||
+    (coOrdinates.length !== 4 && coOrdinates.length !== 2)
   ) {
     print(
       "\n🚫🚫🚫 Invalid input, please check the❗NOTE❗below and give valid inputs 🚫🚫🚫"
