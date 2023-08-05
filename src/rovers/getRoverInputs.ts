@@ -9,60 +9,68 @@ import {
   Grid,
 } from "../plateau/plateau.types";
 import { isOnPlateau } from "../plateau/isOnPlateau";
-import { RoverPosition, compassDirections } from "./rover.types";
-
-// type compassDirections = "N" | "E" | "S" | "W";
-// type RoverPosition = { coOrds: CoOrds; currentDirection: compassDirections };
+import { RoverPosition, compassDirections, RoverERRORS } from "./rover.types";
 
 /*
-*----------*
-|PsudoCode |
-*----------*
-1. 'getRoverInputs' fucntion takes plateauBoundary, initialPosition and instructions as inputs.
-  (1a) Rover position must be x and Y cooradinates along with Direction it is facing ie., 3 4 E
-    (i) As the given input('initialPosition') is String split the input and check if the first two elements are 'numbers' 
-        and the last element must be any of the compass directions.->checkGivenPositionValidity(givenPosition).
-  (1b). Rover instructions must contain only Left,Right and Move (L,R,M) ->isValidInstruction()
-
-  (1c). If both the Inputs to the rover are valid then we will place the rover in the given position and start executing instructions.
-        setRoverAndExecute()
-*/
+ * *----------*
+ * |PsudoCode |
+ **----------*
+ * 1. 'getRoverInputs' fucntion takes plateauBoundary, initialPosition and instructions as inputs.
+ *  (1a) Rover position must be x and Y cooradinates along with Direction it is facing ie., 3 4 E
+ *    (i) As the given input('initialPosition') is String split the input and check if the first two elements are 'numbers'
+ *        and the last element must be any of the compass directions.->checkGivenPositionValidity(givenPosition).
+ * (1b). Rover instructions must contain only Left,Right and Move (L,R,M) ->isValidInstruction()
+ *
+ * (1c). If both the Inputs to the rover are valid then we will place the rover in the given position and start executing instructions.
+ *       setRoverAndExecute()
+ */
 
 //This function will check if the given input position of the rover is  valid or not
-export function getRoverInputs(
+
+export function getRoverPosition(
   plateauCorners: PlateauCorners,
   plateauShape: PlateauShape,
   initialPosition: string
-): Array<RoverPosition | string> {
-  //console.log("-----GetRover-----");
-  const [coOrds, currentDirection] = isValidInputFormat(
+): RoverPosition | RoverERRORS {
+  const isValidCoOrds: Array<Grid | string> | RoverERRORS = isValidInputFormat(
     plateauCorners,
     plateauShape,
     initialPosition
   );
-  const roverPosition = {
-    coOrds: coOrds as Grid,
-    currentDirection: currentDirection as compassDirections,
-  };
-  const roverInstructions = getRoverInstructions();
-  return [roverPosition, roverInstructions];
+  // console.log("isValidCoOrds", isValidCoOrds);
+  let roverPosition = {};
+  if (isValidCoOrds === "INVALID_ROVER_POSITION") return isValidCoOrds;
+  else {
+    const [coOrds, currentDirection] = isValidCoOrds;
+    roverPosition = {
+      coOrds: coOrds as Grid,
+      currentDirection: currentDirection as compassDirections,
+    };
+  }
+  return roverPosition as RoverPosition;
 }
 
+/*
+ * This function will take the given input/ initial position of the Rover
+ * and check if given format is correct by calling isValidPosition()
+ * if so it will check if it is on the plateau or not by calling isOnPlateau() from isOnPlateau.ts
+ */
 function isValidInputFormat(
   plateauCorners: PlateauCorners,
   plateauShape: PlateauShape,
   initialPosition: string
-): Array<Grid | string> {
-  // console.log("---isValidInputFormat------");
+): Array<Grid | string> | RoverERRORS {
   let givenPosition = initialPosition
     .replace(/\s+/g, " ") //If the given input has more spaces between the characters this will replace them into one space
     .trim()
     .split(" ")
     .map((ele) => (isNaN(parseInt(ele)) ? ele : parseInt(ele))); //Convering digits from string to number and leaves strings as is
+  console.log(givenPosition);
 
   if (!isValidPositon(givenPosition)) {
     print("➡️PleaseCheck the Note below 👇 and enter valid input ");
-    startSettingRover(plateauCorners, plateauShape, true); // ❌ERROR: so Start settign rover again
+    // startSettingRover(plateauCorners, plateauShape, true); // ❌ERROR: so Start settign rover again
+    return "INVALID_ROVER_POSITION"; // ❌ERROR: so Start settign rover again. this will indicate to startSettingRover() in index.ts
   }
 
   // Since given input format is valid i.e, Eg: 1 2 N
@@ -79,7 +87,7 @@ function isValidInputFormat(
     print(
       "🚫🚫🚫 Given coordinates of the Rover is not on the plateau. Please give valid coOrdinates 🚫🚫🚫"
     );
-    startSettingRover(plateauCorners, plateauShape, true); // ❌ERROR: so Start settign rover again
+    return "INVALID_ROVER_POSITION"; // ❌ERROR: so Start settign rover again
   }
 
   return [[xCoOrd, yCoOrd], givenPosition[2] as string];
