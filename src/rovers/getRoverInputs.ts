@@ -1,7 +1,4 @@
 import { print } from "../ui/console";
-import { startSettingRover } from "..";
-import { getRoverInstructions } from "./getRoverInstructions";
-
 import {
   PlateauCorners,
   CoOrds,
