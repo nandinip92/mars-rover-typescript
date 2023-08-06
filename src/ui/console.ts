@@ -19,6 +19,7 @@ export function clear(addTopBorder: boolean): void {
 const readlineSync = require(`readline-sync`);
 
 // this function allows us to prompt the user with a question, and call a callback function with whatever string has been input
-export function askQuestion(question: string) {
-  return readlineSync.question(`❓ ${question} 👉 `);
+export async function askQuestion(question: string) {
+  return await Promise.resolve(readlineSync.question(`❓ ${question} 👉 `));
+  //return new Promise((resolve) => readlineSync.question(`❓ ${question} 👉 `));
 }
