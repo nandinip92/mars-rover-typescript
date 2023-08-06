@@ -51,7 +51,6 @@ export function getPlateauInputs(
   ) {
     return "INVALID_INPUT"; // ❌ERROR: this will indicate to startMission() in index.ts
   }
-  console.log(plateauCorners);
   return [plateauCorners, plateauShape, obs];
 }
 

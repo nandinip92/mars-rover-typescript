@@ -62,11 +62,9 @@ function isValidInputFormat(
     .replace(/\s+/g, " ") //If the given input has more spaces between the characters this will replace them into one space
     .split(" ")
     .map((ele) => (isNaN(parseInt(ele)) ? ele.toUpperCase() : parseInt(ele))); //Convering digits from string to number and leaves strings as is
-  console.log(givenPosition);
 
   if (!isValidPositon(givenPosition)) {
     print("➡️PleaseCheck the❗Note❗below 👇 and enter valid input ");
-    // startSettingRover(plateauCorners, plateauShape, true); // ❌ERROR: so Start settign rover again
     return "INVALID_ROVER_POSITION"; // ❌ERROR: so Start settign rover again. this will indicate to startSettingRover() in index.ts
   }
 
