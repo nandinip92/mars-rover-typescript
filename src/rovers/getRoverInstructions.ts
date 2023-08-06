@@ -7,14 +7,13 @@ import { RoverERRORS } from "./rover.types";
 Instruction must contain only L,R and M
 */
 
-export function getRoverInstructions(): string | RoverERRORS {
-  const instruction = askQuestion("Enter Rover instructions");
-  const validInstruction = isValidInstruction(instruction);
-  return validInstruction;
-}
-
-export function isValidInstruction(instructions: string): string {
-  const roverInstructions = instructions.replace(/\s+/g, "").trim();
+export function getRoverInstructions(
+  instructions: string
+): string | RoverERRORS {
+  const roverInstructions = instructions
+    .trim()
+    .replace(/\s+/g, "")
+    .toUpperCase();
   const isValidInstruction = roverInstructions
     .split("")
     .map((i) => ["L", "R", "M"].includes(i));
