@@ -28,7 +28,7 @@ function welcomeToMarsMission(): void {
   startMission();
 }
 
-export function startMission() {
+export async function startMission() {
   print(
     `❗NOTE: We need lower-left co-ordinates and upper-right coordinates of the Plateau.
     \tIf only one coordinate is given then, it will be considered as upper-right corner,
@@ -37,8 +37,8 @@ export function startMission() {
     `
   );
 
-  const inputCoOrds: string = askQuestion(
-    "Enter the plateau co-ordinates seperated with spaces Eg: X Y"
+  const inputCoOrds: string = await Promise.resolve(
+    askQuestion("Enter the plateau co-ordinates seperated with spaces Eg: X Y")
   );
 
   const plateauInputs = getPlateauInputs(inputCoOrds);
@@ -46,6 +46,7 @@ export function startMission() {
   if (plateauInputs === "INVALID_INPUT") startMission();
   else {
     let [plateauCorners, plateauShape, obstacles] = plateauInputs;
+    console.log(plateauCorners);
     //console.log([plateauCorners, plateauShape, obstacles]);
 
     //'flag' value is to used to check if the Rover is being placed on a new plateau or on the same plateau
@@ -59,11 +60,11 @@ export function startMission() {
   }
 }
 
-export function startSettingRover(
+export async function startSettingRover(
   plateauCorners: PlateauCorners,
   plateauShape: PlateauShape,
   flag: Boolean
-): void {
+) {
   //if this function is called for the first time or when given invalid inputs
   // then display ❗Note on how to given rover values
   //else prompt the user about next steps.
@@ -76,14 +77,14 @@ export function startSettingRover(
             `);
   } else {
     const userResponse = askQuestion(
-      "Do you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
+      "\nDo you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
     );
     // if the user doesnot wish to continue on the same plateau then start the mission again.
     if (checkResponse(userResponse) === "N") welcomeToMarsMission();
   }
 
-  const inputPosition = askQuestion(
-    "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
+  const inputPosition = await Promise.resolve(
+    askQuestion("Enter 🦸Rover's🦸 coOrdinates on plateau and its direction")
   );
 
   const roverPosition = getRoverPosition(
@@ -91,6 +92,7 @@ export function startSettingRover(
     plateauShape,
     inputPosition
   );
+
   if (roverPosition === "INVALID_ROVER_POSITION") {
     startSettingRover(plateauCorners, plateauShape, true);
     return;
@@ -98,8 +100,13 @@ export function startSettingRover(
   let roverInstructions = "INVALID_ROVER_INSTRUCTION";
   //This will prompt for Valid Instructions untill one is given
   while (roverInstructions === "INVALID_ROVER_INSTRUCTION") {
-    roverInstructions = getRoverInstructions();
+    const instruction = await Promise.resolve(
+      askQuestion("Enter Rover instructions")
+    );
+    roverInstructions = getRoverInstructions(instruction);
   }
+  console.log(roverPosition);
+  console.log(roverInstructions);
 
   const latestPosition = setRoverAndExecute(
     plateauCorners,
