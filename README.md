@@ -105,9 +105,52 @@ npm install
 npm start
 ```
 
-Core logic files :
+## How application works?
+
+👉 After start it will take Plateau CoOrdinates as First Input
+![plateauInputs](images/plateauInputs.png)
+
+👉 Will take Rover Initial positionas as second Input
+![RoverCoordinatesInput](images/RoverCoordinatesInput.png)
+
+👉 And it will take Plateau CoOrdinates as final Input and displays final rover position
+![RoverInstructions](images/RoverInstructions.png)
+
+👉 To continuation it will prompt if user wants to continue launching the rover on same plateau or not, if yes it will take same plateau coOrdinates
+![YesOrNoPrompt](images/YesOrNoPrompt.png)
+
+#### Core logic files :
 
 ```
 src/plateau/isInsidePlateau.ts
 src/rover/setRoverAndExecute.ts
 ```
+
+#### FlowChart on how input data is being processed in the business logic:
+
+[![flowChart](images/businessLogicFlowChart.png)](images/MarsRoverFlowChart.pdf)<base target="_blank">
+
+#### Input data flow from UI Files to Core files :
+
+```
+    index.ts
+    |
+    getPlateauInputs.ts ---->   getPlateauCorners.ts    ---->   isOnPlateau.ts
+    |                                   |
+    startSettingRover   ---->   getRoverPosition.ts
+                        |               |
+                        ----->  getRoverInstructions.ts
+                        |               |
+                        ----->  setRoverAndExecute.ts   ---->   isOnPlateau.ts
+
+```
+
+### ❗NOTE:
+
+- This application can take lower Left coordinates of the plateau as input as well.
+- Currently the shape of the plateau is Square/Rectangle only.
+- There are no obstacles for now, current business logic works if in future any obstacles are being considered on the plateau.
+
+## 💁💡Future thoughts
+
+Considering obstacles, Rover collisions and other plateau shapes apart from Square/Rectangle
