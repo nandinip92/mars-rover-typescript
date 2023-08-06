@@ -65,6 +65,7 @@ function isValidInputFormat(
 
   if (!isValidPositon(givenPosition)) {
     print("➡️PleaseCheck the❗Note❗below 👇 and enter valid input ");
+    ("");
     return "INVALID_ROVER_POSITION"; // ❌ERROR: so Start settign rover again. this will indicate to startSettingRover() in index.ts
   }
 
