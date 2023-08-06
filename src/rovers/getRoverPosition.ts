@@ -58,11 +58,11 @@ function isValidInputFormat(
   initialPosition: string
 ): Array<Grid | string> | RoverERRORS {
   let givenPosition = initialPosition
-    .replace(/\s+/g, " ") //If the given input has more spaces between the characters this will replace them into one space
     .trim()
+    .replace(/\s+/g, " ") //If the given input has more spaces between the characters this will replace them into one space
     .split(" ")
-    .map((ele) => (isNaN(parseInt(ele)) ? ele : parseInt(ele))); //Convering digits from string to number and leaves strings as is
-  //console.log(givenPosition);
+    .map((ele) => (isNaN(parseInt(ele)) ? ele.toUpperCase() : parseInt(ele))); //Convering digits from string to number and leaves strings as is
+  console.log(givenPosition);
 
   if (!isValidPositon(givenPosition)) {
     print("➡️PleaseCheck the❗Note❗below 👇 and enter valid input ");

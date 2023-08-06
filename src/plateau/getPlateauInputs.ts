@@ -26,8 +26,8 @@ export function getPlateauInputs(
   obstacles?: string //💁❗FUTURE DEVELOPMENT on obstacles
 ): Array<PlateauInputs> | PlateauERROR {
   const coOrdinates = inputCoOrds
-    .replace(/\s+/g, " ") //replaces extra whitespaces to single space Eg:3   5 -> 3 5
     .trim()
+    .replace(/\s+/g, " ") //replaces extra whitespaces to single space Eg:3   5 -> 3 5
     .split(" ")
     .map((ele) => (isNaN(parseInt(ele)) ? ele : parseInt(ele))); //converts every digit in the sting into number
 
@@ -51,6 +51,7 @@ export function getPlateauInputs(
   ) {
     return "INVALID_INPUT"; // ❌ERROR: this will indicate to startMission() in index.ts
   }
+  console.log(plateauCorners);
   return [plateauCorners, plateauShape, obs];
 }
 
