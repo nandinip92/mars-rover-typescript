@@ -43,14 +43,17 @@ export async function startMission() {
 
   const plateauInputs = getPlateauInputs(inputCoOrds);
 
-  if (plateauInputs === "INVALID_INPUT") startMission();
-  else {
+  if (plateauInputs === "INVALID_INPUT") {
+    startMission();
+    return;
+  } else {
     let [plateauCorners, plateauShape, obstacles] = plateauInputs;
     //console.log(plateauCorners);
     //console.log([plateauCorners, plateauShape, obstacles]);
 
     //'flag' value is to used to check if the Rover is being placed on a new plateau or on the same plateau
     const flag = true;
+
     //Now start taking inputs for the rover
     startSettingRover(
       plateauCorners as PlateauCorners,
@@ -77,16 +80,19 @@ export async function startSettingRover(
             `);
   } else {
     const userResponse: string = await askQuestion(
-      "\nDo you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
+      "Do you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
     );
     // if the user doesnot wish to continue on the same plateau then start the mission again.
-    if (checkResponse(userResponse) === "N") welcomeToMarsMission();
+    if (checkResponse(userResponse) === "N") {
+      welcomeToMarsMission();
+      return;
+    }
   }
 
   const inputPosition: string = await Promise.resolve(
     askQuestion("Enter 🦸Rover's🦸 coOrdinates on plateau and its direction")
   );
-  console.log("INPUT POSITION ", inputPosition);
+  //console.log("INPUT POSITION ", inputPosition);
   const roverPosition = getRoverPosition(
     plateauCorners,
     plateauShape,
@@ -118,6 +124,7 @@ export async function startSettingRover(
   console.log(`🏁🏁🏁🦸Rover's New position🦸🏁🏁🏁 ${latestPosition}`);
 
   startSettingRover(plateauCorners, plateauShape, false);
+  return;
 }
 
 ////💁❗FUTURE DEVELOPMENT: looping through mission
