@@ -1,14 +1,14 @@
-import { isValidInstruction } from "../../src/rovers/getRoverInstructions";
+import { getRoverInstructions } from "../../src/rovers/getRoverInstructions";
 
 describe("getRoverInstructions", () => {
   test("Return Valid Instruction String", () => {
-    expect(isValidInstruction("LMLMLMLMLM")).toBe("LMLMLMLMLM");
-    expect(isValidInstruction("LMLRMRMLMLM")).toBe("LMLRMRMLMLM");
-    expect(isValidInstruction("MMRMMRMRRM")).toBe("MMRMMRMRRM");
+    expect(getRoverInstructions("LMLMLMLMLM")).toBe("LMLMLMLMLM");
+    expect(getRoverInstructions("LMLRMRMLMLM")).toBe("LMLRMRMLMLM");
+    expect(getRoverInstructions("MMRMMRMRRM")).toBe("MMRMMRMRRM");
   });
   test("Return ERROR for inavlid Instruction String", () => {
-    expect(isValidInstruction("LKMN")).toBe("INVALID_ROVER_INSTRUCTION");
-    expect(isValidInstruction("jsdaksdhashfoi")).toBe(
+    expect(getRoverInstructions("LKMN")).toBe("INVALID_ROVER_INSTRUCTION");
+    expect(getRoverInstructions("jsdaksdhashfoi")).toBe(
       "INVALID_ROVER_INSTRUCTION"
     );
   });
