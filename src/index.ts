@@ -28,7 +28,7 @@ function welcomeToMarsMission(): void {
   startMission();
 }
 
-export async function startMission() {
+export function startMission() {
   print(
     `❗NOTE: We need lower-left co-ordinates and upper-right coordinates of the Plateau.
     \tIf only one coordinate is given then, it will be considered as upper-right corner,
@@ -37,8 +37,8 @@ export async function startMission() {
     `
   );
 
-  const inputCoOrds: string = await Promise.resolve(
-    askQuestion("Enter the plateau co-ordinates seperated with spaces Eg: X Y")
+  const inputCoOrds: string = askQuestion(
+    "Enter the plateau co-ordinates seperated with spaces Eg: X Y"
   );
 
   const plateauInputs = getPlateauInputs(inputCoOrds);
@@ -79,7 +79,7 @@ export async function startSettingRover(
             2️⃣Movement instructionsshould contain on L, R and M (L-Left, R-Right, M-Move) Eg: LMLMLMLMM
             `);
   } else {
-    const userResponse: string = await askQuestion(
+    const userResponse: string = askQuestion(
       "Do you want to continue launching 🦸Rovers🦸 on same Plateau? (y/n)"
     );
     // if the user doesnot wish to continue on the same plateau then start the mission again.
@@ -89,10 +89,10 @@ export async function startSettingRover(
     }
   }
 
-  const inputPosition: string = await Promise.resolve(
-    askQuestion("Enter 🦸Rover's🦸 coOrdinates on plateau and its direction")
+  const inputPosition: string = askQuestion(
+    "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
   );
-  //console.log("INPUT POSITION ", inputPosition);
+  console.log("---> INPUT POSITION ", inputPosition);
   const roverPosition = getRoverPosition(
     plateauCorners,
     plateauShape,
@@ -106,10 +106,8 @@ export async function startSettingRover(
   let roverInstructions = "INVALID_ROVER_INSTRUCTION";
   //This will prompt for Valid Instructions untill one is given
   while (roverInstructions === "INVALID_ROVER_INSTRUCTION") {
-    const instruction = await Promise.resolve(
-      askQuestion("Enter Rover instructions")
-    );
-    //console.log(instruction);
+    const instruction = askQuestion("Enter Rover instructions");
+    console.log("---> Instruction", instruction);
     roverInstructions = getRoverInstructions(instruction);
   }
   // console.log(roverPosition);
