@@ -75,7 +75,6 @@ _Lines of Input to the Program:_
 LMLMLMLMM
 3 3 E
 MMRMMRMRRM
-
 ```
 
 _Expected Output:_
@@ -83,7 +82,6 @@ _Expected Output:_
 ```
 1 3 N
 5 1 E
-
 ```
 
 ## Creating Your application
@@ -108,15 +106,19 @@ npm start
 ## How application works?
 
 👉 After start it will take Plateau CoOrdinates as First Input
+
 ![plateauInputs](images/plateauInputs.png)
 
 👉 Will take Rover Initial positionas as second Input
+
 ![RoverCoordinatesInput](images/RoverCoordinatesInput.png)
 
 👉 And it will take Plateau CoOrdinates as final Input and displays final rover position
+
 ![RoverInstructions](images/RoverInstructions.png)
 
 👉 To continuation it will prompt if user wants to continue launching the rover on same plateau or not, if yes it will take same plateau coOrdinates
+
 ![YesOrNoPrompt](images/YesOrNoPrompt.png)
 
 #### Core logic files :
@@ -153,4 +155,4 @@ src/rover/setRoverAndExecute.ts
 
 ## 💁💡Future thoughts
 
-Considering obstacles, Rover collisions and other plateau shapes apart from Square/Rectangle
+Considering obstacles, Rover collisions and other plateau shapes.
