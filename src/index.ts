@@ -92,7 +92,7 @@ export async function startSettingRover(
   const inputPosition: string = askQuestion(
     "Enter 🦸Rover's🦸 coOrdinates on plateau and its direction"
   );
-  console.log("---> INPUT POSITION ", inputPosition);
+  //console.log("---> INPUT POSITION ", inputPosition);
   const roverPosition = getRoverPosition(
     plateauCorners,
     plateauShape,
@@ -107,7 +107,7 @@ export async function startSettingRover(
   //This will prompt for Valid Instructions untill one is given
   while (roverInstructions === "INVALID_ROVER_INSTRUCTION") {
     const instruction = askQuestion("Enter Rover instructions");
-    console.log("---> Instruction", instruction);
+    //console.log("---> Instruction", instruction);
     roverInstructions = getRoverInstructions(instruction);
   }
   // console.log(roverPosition);
